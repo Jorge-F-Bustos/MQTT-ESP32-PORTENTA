@@ -1,7 +1,6 @@
 ### **MQTT-ESP32-Portenta-Docker**
 
-```markdown
-# 🌐 Sistema de transmisión de datos IoT con ESP32 y Portenta X8
+# Sistema de transmisión de datos IoT con ESP32 y Portenta X8
 
 Este proyecto implementa un sistema de transmisión de datos entre un **ESP32** y el **Portenta X8**, utilizando el protocolo **MQTT** sobre un broker Mosquitto ejecutado en **Docker**.
 
