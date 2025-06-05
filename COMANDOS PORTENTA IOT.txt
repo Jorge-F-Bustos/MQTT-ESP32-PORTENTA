@@ -1,0 +1,58 @@
+PASOS PARA CONFIGURAR PORTENTA: 
+cd "C:\Users\J Ferb\AppData\Local\Arduino15\packages\arduino\tools\adb\32.0.0"
+.\adb shell
+
+CONFIGURANDO WIFI: 
+nmcli dev wifi list
+nmcli dev wifi connect "vivo Y36" password "IOT4130@"
+nmcli connection show
+
+OBTENIENDO DIRECCION IP: 
+ifconfig
+ip addr show
+
+CONECTANDOSE AL PORTENTA SI YA SE TIENE LA DIRECCION IP: 
+ssh fio@"ip"
+ssh fio@192.168.1.11
+ssh fio@192.168.118.159
+
+CONTENEDORES: 
+docker ps -a
+docker ps
+
+CONFIGURANDO GRAFANA:
+docker stop grafana
+docker rm grafana
+docker run -d --name=grafana -p 3000:3000 grafana/grafana
+
+CONFIGURANDO MOSQUITTO:
+docker stop mosquitto
+docker rm mosquitto
+docker run -d --name mosquitto -p 1883:1883 eclipse-mosquitto
+sudo docker exec -it mosquitto sh
+echo -e "listener 1883 0.0.0.0\nallow_anonymous true" > /mosquitto/config/mosquitto.conf
+exit
+sudo docker restart mosquitto
+docker logs mosquitto
+
+
+SUBSCRIPCION AL TOPICO DESDE PORTENTAX8:
+docker exec -it mosquitto mosquitto_sub -t "#" -h localhost
+docker exec -it mosquitto mosquitto_sub -t "potentiometer" -h localhost
+
+ENTRANDO A GRAFANA DESDE INTERNET:
+http://"IP del Portenta X8":3000
+http://192.168.1.11:3000
+http://192.168.118.159:3000
+
+CONFIGURACION DEL PLUGIN:
+mqtt://"IP del Portenta X8":1883
+mqtt://192.168.1.11:1883
+mqtt://192.168.118.159:1883
+
+admin
+admin
+
+
+
+
